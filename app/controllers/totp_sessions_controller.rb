@@ -1,5 +1,6 @@
 class TotpSessionsController < ApplicationController
   def new
+    redirect_to root_url if session[:totp_confirmed]
     @totp = ROTP::TOTP.new(totp_secret, issuer: User::TOTP_ISSUER)
   end
 
