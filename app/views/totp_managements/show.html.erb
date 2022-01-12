@@ -1,0 +1,17 @@
+<h1>TotpManagement#show</h1>
+<p>Find me in app/views/totp_management/show.html.erb</p>
+
+<% if current_user.totp_secret.present? %>
+ youre all set
+
+ <%= button_to "Remove", {action: :destroy}, method: :delete %>
+
+<% else %>
+  <%= qr_code_svg(current_user, @totp) %>
+
+  <%= form_with url: totp_managements_url, method: :patch do |f| %>
+    <%= f.label :validate_code %>
+    <%= f.text_field :validate_code %>
+    <%= f.submit 'Validate' %>
+  <% end %>
+<% end %>

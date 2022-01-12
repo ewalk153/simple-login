@@ -7,7 +7,11 @@ class SessionController < ApplicationController
   def create
     if @user = User.find_by_email(user_params[:email])&.authenticate(user_params[:password])
       session[:user_id] = @user.id
-      redirect_to root_url
+      if @user.totp_protected?
+        redirect_to totp_auth_url
+      else
+        redirect_to root_url
+      end
     else
       flash.now.alert = 'Invalid email or password'
       @user = User.new(**user_params.slice(:email))
@@ -16,7 +20,7 @@ class SessionController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    reset_session
     redirect_to root_url
   end
 

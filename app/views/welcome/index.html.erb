@@ -1,7 +1,7 @@
 <h1>Home page</h1>
 
 <% if current_user %>
-  current_user: <%= current_user.email %>
+  current_user: <%= current_user.email %> <%= "extra auth" if totp_authed? %>
   <%= button_to "Logoff", logout_url, method: 'delete' %>
 <% else %>
   not logged in | <%= link_to "Sign in", sign_in_path %>

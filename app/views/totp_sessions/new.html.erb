@@ -1,0 +1,7 @@
+<h1> Authenticate 2F </h1>
+
+<%= form_with url: totp_auth_url do |f| %>
+  <%= f.label :validate_code %>
+  <%= f.text_field :validate_code %>
+  <%= f.submit 'Login' %>
+<% end %>

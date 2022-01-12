@@ -16,6 +16,11 @@
         <%= flash['alert'] %> 
       </div>
     <% end %>
+    <% if flash.key?('notice') %>
+      <div>
+        <%= flash['notice'] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

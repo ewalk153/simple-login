@@ -6,4 +6,10 @@ Rails.application.routes.draw do
   get 'profile', to: 'profiles#show', as: 'profile'
   post 'profile', to: 'profiles#update'
   root "welcome#index"
+
+  resource 'totp_managements', except: [:edit]
+  get 'totp_managements/show', to: 'totp_managements#show', as: 'show_totp_managements'
+
+  get 'totp_auth', to: 'totp_sessions#new', as: 'totp_auth'
+  post 'totp_auth', to: 'totp_sessions#create'
 end
