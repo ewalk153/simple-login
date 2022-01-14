@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
 
     if @current_user.totp_protected? && !session[:totp_confirmed]
-      redirect_to auth_totp_url
+      redirect_to totp_auth_url
     end
   end
 
